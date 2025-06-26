@@ -11,6 +11,7 @@ const MainData = ({service} :MainDataProps) => {
     const defaultWeather = {
         location: "",
         weather: "",
+        icon: "",
         temperature: "",
         humidity: "",
         pressure: "",

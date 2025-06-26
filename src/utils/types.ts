@@ -1,6 +1,7 @@
 export type WeatherState = {
     location: string;
     weather: string,
+    icon: string,
     temperature: string,
     humidity: string,
     pressure: string,

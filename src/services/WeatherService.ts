@@ -33,6 +33,7 @@ export class OpenWeatherService implements WeatherServiceInterface {
         return {
             location: `${city}, ${country}`,
             weather: weather,
+            icon: icon,
             temperature: temperature,
             humidity: humidity,
             pressure: pressure,
