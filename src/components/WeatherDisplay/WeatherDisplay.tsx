@@ -1,11 +1,27 @@
-const WeatherDisplay = () => {
+import "./WeatherDisplay.css";
+import type {WeatherState, displayState} from "../../utils/types.ts";
+
+
+
+interface WeatherDisplayProps {
+    state: displayState;
+    error?: string;
+    data?: WeatherState;
+}
+
+const WeatherDisplay =
+    ({state, data, error}: WeatherDisplayProps) => {
     return (
-        <div>
-            <p>Location: Washington, US</p>
-            <p>Weather: cloudy</p>
-            <p>Temperature: 31 C</p>
-            <p>Humidity: 75</p>
-        </div>
+        <>
+            {(state === "awaiting") && <span className="loader"></span>}
+            {(state === "error") && <p className="error">{error}</p>}
+            {(state === "ok") &&
+                Object.entries(data!)
+                .map(([key, value]) => (
+                    <p>{key}: {value}</p>
+                ))
+            }
+        </>
     );
 };
 

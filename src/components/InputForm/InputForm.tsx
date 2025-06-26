@@ -1,15 +1,18 @@
 import React from "react";
-import {WeatherService} from "../../services/WeatherService.ts";
 
-const InputForm = () => {
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+type InputFormProps = {
+    onSubmit: (city: string) => void;
+}
+
+const InputForm = ({onSubmit}: InputFormProps) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const location = event.currentTarget.location.value.trim();
-        WeatherService.getDataByCityName(location)
-            .then(obj => {console.log("FORM RECEIVED: ", obj)});
+        console.log("InputForm send: ", location);
+        onSubmit(location);
     }
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
             <input name = {"location"} id ={"input-location"} type={"text"}></input>
             <button id ={"get-weather"} type={"submit"}>Get weather!</button>
         </form>
