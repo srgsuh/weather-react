@@ -9,7 +9,9 @@ const InputForm = ({onSubmit}: InputFormProps) => {
         event.preventDefault();
         const location = event.currentTarget.location.value.trim();
         console.log("InputForm send: ", location);
-        onSubmit(location);
+        if (location) {
+            onSubmit(location);
+        }
     }
     return (
         <form onSubmit={handleSubmit}>
