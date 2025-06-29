@@ -12,25 +12,25 @@ interface WeatherDisplayProps {
 
 const WeatherDisplay = ({state, data, error}: WeatherDisplayProps) => {
 
-    const strToP = (text: string) => {
-        return <p>{text}</p>;
+    const strToP = (text: string, key:string) => {
+        return <p key={key}>{text}</p>;
     }
     const toCamelCase = (str: string) => {
-        return str[0].toUpperCase() + str.substring(1).toLowerCase();
+        return str && str[0].toUpperCase() + str.substring(1).toLowerCase();
     }
 
     if (state === "ok") {
         const {location, weather, icon, ...rest} = data!;
         const imgUrl = iconUrlPattern.replace("{iconCode}", icon);
         const locationInfo = (
-          <h3>Weather forecast in {location}:</h3>
+          <h3 key={"location"}>Weather forecast in {location}:</h3>
         );
-        const weatherInfo = (<p>
+        const weatherInfo = (<p key={"weather"}>
             {icon && <img alt = {weather} src = {imgUrl}/>}
             {toCamelCase(weather)}
         </p>);
         const others = Object.entries(rest)
-            .map(([k, v]) => (strToP(`${toCamelCase(k)}: ${v}`)));
+            .map(([k, v]) => (strToP(`${toCamelCase(k)}: ${v}`, k)));
 
         return (<>
              {[locationInfo, weatherInfo, ...others]}
